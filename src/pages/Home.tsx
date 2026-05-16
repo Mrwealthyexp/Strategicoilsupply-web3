@@ -1,129 +1,221 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight, Globe, Lock, Zap, TrendingUp, Users, Award } from 'lucide-react'
+import { Link } from 'react-router'
+import { Globe, Shield, Zap, Wallet, ChevronRight, TrendingUp, Users, Lock } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 
 export default function Home() {
+  const stats = [
+    { value: '$5T+', label: 'Global Energy Market', icon: TrendingUp },
+    { value: '1,769+', label: 'Oil & Gas Companies', icon: Users },
+    { value: '50%', label: 'Royalty per Registration', icon: Lock },
+    { value: '$0', label: 'Annual Renewal Fees', icon: Shield },
+  ]
+
+  const benefits = [
+    {
+      icon: Globe,
+      title: 'Industry-Specific Identity',
+      desc: 'Signal your sector alignment with an energy-native domain that commands instant credibility among counterparties.',
+    },
+    {
+      icon: Wallet,
+      title: 'Web3 Payment Routing',
+      desc: 'Receive USDT, USDC, and crypto payments directly to your human-readable domain address via MetaMask Snap.',
+    },
+    {
+      icon: Shield,
+      title: 'Brand Protection',
+      desc: 'Secure your brand across the energy Web3 namespace before competitors or speculators capture it.',
+    },
+    {
+      icon: Zap,
+      title: 'Lifetime Ownership',
+      desc: 'No annual renewal fees. No expirations. Mint once, own forever on Polygon and Base.',
+    },
+  ]
+
+  const personas = [
+    { name: 'Commodity Traders', desc: 'Branded payment endpoints for oil, gas, and carbon credit settlements' },
+    { name: 'Energy Consultants', desc: 'Credibility-focused domains that differentiate advisory services' },
+    { name: 'Logistics Operators', desc: 'Geographic domains for tanker, pipeline, and terminal identity' },
+    { name: 'Crypto-Native Startups', desc: 'Web3-first namespaces for RWA tokenization platforms' },
+  ]
+
   return (
-    <div className="space-y-20">
+    <div>
       {/* Hero Section */}
-      <section className="space-y-8 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
-          Web3 Energy Domain Registry
-        </h1>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-          Register and trade blockchain domains for the global energy supply chain. Instant ownership, zero intermediaries.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/domains" className="btn-primary">
-            Browse Domains <ArrowRight size={20} />
-          </Link>
-          <Link to="/register" className="btn-secondary">
-            Get Started
-          </Link>
+      <section className="relative overflow-hidden gradient-oil">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 right-20 w-72 h-72 rounded-full border border-[#B87333]" />
+          <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full border border-[#CD853F]" />
         </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="grid md:grid-cols-3 gap-6">
-        {[
-          { label: 'Active Domains', value: '1,247', icon: Globe },
-          { label: '24h Trading Volume', value: '$2.4M', icon: TrendingUp },
-          { label: 'Active Traders', value: '342', icon: Users },
-        ].map(({ label, value, icon: Icon }) => (
-          <div key={label} className="card text-center space-y-2">
-            <Icon className="text-blue-400 mx-auto" size={32} />
-            <p className="text-slate-400 text-sm">{label}</p>
-            <p className="text-3xl font-bold text-cyan-400">{value}</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#B87333]/15 border border-[#B87333]/30 mb-6">
+              <span className="w-2 h-2 rounded-full bg-[#B87333] animate-pulse" />
+              <span className="text-[#D4A574] text-xs font-semibold tracking-wider uppercase">
+                Freename Web3 TLD
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-[#f5e6d0] leading-tight mb-6">
+              The Digital Real Estate for{' '}
+              <span className="text-transparent bg-clip-text gradient-copper">Global Energy</span>
+            </h1>
+            <p className="text-lg md:text-xl text-[#A0826D] leading-relaxed mb-8 max-w-2xl">
+              <strong className="text-[#D4A574]">.strategicoilsupply</strong> is the premier Web3 domain 
+              namespace for commodity traders, NOCs, IOCs, and energy service firms. Own your identity 
+              on the blockchain — lifetime ownership, no renewal fees, 50% royalties for the TLD owner.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/domains">
+                <Button className="gradient-copper text-white font-semibold px-8 py-6 text-base hover:opacity-90">
+                  Browse Available Domains <ChevronRight className="w-5 h-5 ml-1" />
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="outline" className="border-[#B87333] text-[#D4A574] hover:bg-[#B87333]/10 px-8 py-6 text-base">
+                  Register Your Domain
+                </Button>
+              </Link>
+            </div>
           </div>
-        ))}
-      </section>
-
-      {/* Features Section */}
-      <section className="space-y-8">
-        <h2 className="text-4xl font-bold text-center">Why Choose StrategicOilSupply?</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Globe,
-              title: 'Global Reach',
-              description: 'Connect with energy traders worldwide. Your domain works everywhere.',
-            },
-            {
-              icon: Lock,
-              title: 'Secure & Trustless',
-              description: 'Blockchain-backed ownership. No intermediaries, full control.',
-            },
-            {
-              icon: Zap,
-              title: 'Instant Setup',
-              description: 'Register in seconds. Start trading immediately.',
-            },
-          ].map(({ icon: Icon, title, description }) => (
-            <div key={title} className="card space-y-4">
-              <Icon className="text-cyan-400" size={40} />
-              <h3 className="text-xl font-bold">{title}</h3>
-              <p className="text-slate-400">{description}</p>
-            </div>
-          ))}
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="space-y-8">
-        <h2 className="text-4xl font-bold text-center">How It Works</h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            { step: 1, title: 'Connect Wallet', description: 'Link your Ethereum wallet' },
-            { step: 2, title: 'Browse Domains', description: 'Explore available domains' },
-            { step: 3, title: 'Register', description: 'Complete registration with ETH' },
-            { step: 4, title: 'Trade & Manage', description: 'Buy, sell, or manage domains' },
-          ].map(({ step, title, description }) => (
-            <div key={step} className="relative">
-              <div className="card text-center space-y-4">
-                <div className="w-12 h-12 bg-blue-500/20 border-2 border-blue-500 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-xl font-bold text-blue-400">{step}</span>
+      {/* Stats Bar */}
+      <section className="bg-[#1a1208] border-y border-[#3d2b14]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-lg bg-[#3d2b14] border border-[#5c3d1a] flex items-center justify-center flex-shrink-0">
+                  <stat.icon className="w-5 h-5 text-[#B87333]" />
                 </div>
-                <h3 className="font-bold">{title}</h3>
-                <p className="text-sm text-slate-400">{description}</p>
+                <div>
+                  <div className="text-2xl font-bold text-[#D4A574]">{stat.value}</div>
+                  <div className="text-xs text-[#8B7355]">{stat.label}</div>
+                </div>
               </div>
-              {step < 4 && (
-                <div className="hidden md:block absolute right-0 top-1/3 translate-x-1/2 text-slate-600">
-                  <ArrowRight size={24} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-16 md:py-24 bg-[#120d07]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#f5e6d0] mb-4">
+              Why Energy Firms Choose <span className="text-[#B87333]">.strategicoilsupply</span>
+            </h2>
+            <p className="text-[#8B7355] max-w-2xl mx-auto">
+              Energy is a trust-first industry. Your domain is your digital calling card.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {benefits.map((b) => (
+              <Card key={b.title} className="bg-[#1a1208] border-[#3d2b14] hover:border-[#B87333]/50 transition-all group">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 rounded-lg gradient-copper flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <b.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#f5e6d0] mb-2">{b.title}</h3>
+                  <p className="text-[#8B7355] text-sm leading-relaxed">{b.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Buyer Personas */}
+      <section className="py-16 md:py-24 gradient-oil">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#f5e6d0] mb-4">
+              Built For Every Player in Energy
+            </h2>
+            <p className="text-[#8B7355] max-w-2xl mx-auto">
+              Four buyer personas. One namespace. Unlimited applications.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {personas.map((p) => (
+              <div key={p.name} className="bg-[#1a1208]/80 border border-[#3d2b14] rounded-lg p-5 hover:border-[#B87333]/40 transition-all">
+                <h4 className="text-[#D4A574] font-bold text-sm mb-2">{p.name}</h4>
+                <p className="text-[#8B7355] text-sm">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Domains Preview */}
+      <section className="py-16 md:py-24 bg-[#120d07]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#f5e6d0] mb-2">
+                Premium Domains Available
+              </h2>
+              <p className="text-[#8B7355]">Secure your brand before the competition does.</p>
+            </div>
+            <Link to="/domains" className="hidden md:flex items-center text-[#B87333] hover:text-[#D4A574] text-sm font-semibold">
+              View all domains <ChevronRight className="w-4 h-4 ml-1" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { name: 'vitol', price: '$25,000', tier: 'Corporate' },
+              { name: 'trafigura', price: '$25,000', tier: 'Corporate' },
+              { name: 'aramco', price: '$25,000', tier: 'Corporate' },
+              { name: 'trading', price: '$5,000', tier: 'Premium' },
+              { name: 'rotterdam', price: '$5,000', tier: 'Premium' },
+              { name: 'houston', price: '$1,000', tier: 'Professional' },
+            ].map((d) => (
+              <div key={d.name} className="flex items-center justify-between bg-[#1a1208] border border-[#3d2b14] rounded-lg px-5 py-4 hover:border-[#B87333]/50 transition-all group">
+                <div>
+                  <div className="text-[#f5e6d0] font-bold text-base">
+                    {d.name}<span className="text-[#B87333]">.strategicoilsupply</span>
+                  </div>
+                  <div className="text-[#8B7355] text-xs mt-0.5">{d.tier} Tier</div>
                 </div>
-              )}
-            </div>
-          ))}
+                <div className="text-right">
+                  <div className="text-[#D4A574] font-bold">{d.price}</div>
+                  <div className="text-[#5c4a3a] text-xs">one-time</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 text-center md:hidden">
+            <Link to="/domains">
+              <Button variant="outline" className="border-[#B87333] text-[#D4A574]">
+                View all domains <ChevronRight className="w-4 h-4 ml-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Benefits List */}
-      <section className="space-y-8">
-        <h2 className="text-4xl font-bold text-center">Key Benefits</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          {[
-            'Decentralized ownership with blockchain verification',
-            'Real-time trading on secondary markets',
-            'No renewal fees - own your domain forever',
-            'Transferable between wallets instantly',
-            'Energy-efficient proof of stake network',
-            'Community-driven governance and development',
-          ].map((benefit) => (
-            <div key={benefit} className="flex items-start gap-4 card">
-              <Award className="text-green-400 flex-shrink-0 mt-1" size={20} />
-              <p className="text-slate-200">{benefit}</p>
-            </div>
-          ))}
+      {/* CTA */}
+      <section className="py-16 md:py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2d1f0e] via-[#3d2b14] to-[#2d1f0e]" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#f5e6d0] mb-4">
+            Your TLD is a Digital Oil Field That Pays Royalties Forever
+          </h2>
+          <p className="text-[#8B7355] mb-8 max-w-xl mx-auto">
+            Join the 1,769+ energy firms moving to Web3-native identity. 
+            Register your .strategicoilsupply domain today.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/register">
+              <Button className="gradient-copper text-white font-semibold px-8 py-6 text-base hover:opacity-90">
+                Register Now <ChevronRight className="w-5 h-5 ml-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="card text-center space-y-6 bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-blue-500/30">
-        <h2 className="text-4xl font-bold">Ready to Get Started?</h2>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-          Join thousands of energy traders using StrategicOilSupply domains.
-        </p>
-        <Link to="/register" className="btn-primary inline-flex">
-          Register Your Domain <ArrowRight size={20} />
-        </Link>
       </section>
     </div>
   )
