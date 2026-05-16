@@ -1,176 +1,148 @@
-import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Link, useLocation } from 'react-router'
+import { Droplets, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const links = [
     { path: '/', label: 'Home' },
-    { path: '/domains', label: 'Domains' },
+    { path: '/domains', label: 'Available Domains' },
     { path: '/register', label: 'Register' },
   ]
 
-  const isActive = (path: string) => location.pathname === path
-
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="text-2xl font-bold gradient-text">
-              StrategicOilSupply
+    <div className="min-h-screen flex flex-col">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-[#1a1208]/95 backdrop-blur-md border-b border-[#3d2b14]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-lg gradient-copper flex items-center justify-center">
+                <Droplets className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[#f5e6d0] font-bold text-sm tracking-wide leading-tight">
+                  STRATEGIC<span className="text-[#B87333]">OIL</span>SUPPLY
+                </span>
+                <span className="text-[#8B7355] text-[10px] tracking-widest uppercase leading-tight">
+                  Web3 Energy Domains
+                </span>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-1">
               {links.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-medium transition-colors ${
-                    isActive(link.path)
-                      ? 'text-blue-400 border-b-2 border-blue-400 pb-1'
-                      : 'text-slate-400 hover:text-slate-200'
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    location.pathname === link.path
+                      ? 'text-[#D4A574] bg-[#3d2b14]/60'
+                      : 'text-[#A0826D] hover:text-[#D4A574] hover:bg-[#3d2b14]/40'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-            </nav>
+              <a
+                href="https://freename.io/discover/strategicoilsupply"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-3 px-5 py-2 rounded-md text-sm font-semibold gradient-copper text-white hover:opacity-90 transition-opacity"
+              >
+                Buy on Freename
+              </a>
+            </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile toggle */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-slate-400 hover:text-white transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden p-2 text-[#A0826D]"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <nav className="md:hidden mt-4 space-y-2">
-              {links.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-2 rounded transition-colors ${
-                    isActive(link.path)
-                      ? 'bg-blue-500/20 text-blue-400'
-                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          )}
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-12">
-        {children}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 mt-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            {/* Brand */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold gradient-text">StrategicOilSupply</h3>
-              <p className="text-slate-400 text-sm">
-                Web3 domain registry for the energy sector.
-              </p>
-            </div>
-
-            {/* Product */}
-            <div>
-              <h4 className="font-semibold text-slate-200 mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Browse Domains
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Register
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Pricing
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h4 className="font-semibold text-slate-200 mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div>
-              <h4 className="font-semibold text-slate-200 mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Cookie Policy
-                  </a>
-                </li>
-              </ul>
+        {/* Mobile Nav */}
+        {mobileOpen && (
+          <div className="md:hidden border-t border-[#3d2b14] bg-[#1a1208]">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileOpen(false)}
+                className={`block px-4 py-3 text-sm font-medium border-b border-[#3d2b14] ${
+                  location.pathname === link.path
+                    ? 'text-[#D4A574] bg-[#3d2b14]/40'
+                    : 'text-[#A0826D]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="p-4">
+              <a
+                href="https://freename.io/discover/strategicoilsupply"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center px-5 py-3 rounded-md text-sm font-semibold gradient-copper text-white"
+              >
+                Buy on Freename
+              </a>
             </div>
           </div>
+        )}
+      </nav>
 
-          {/* Bottom */}
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-            <p>&copy; 2026 StrategicOilSupply. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-blue-400 transition-colors">
-                Twitter
-              </a>
-              <a href="#" className="hover:text-blue-400 transition-colors">
-                Discord
-              </a>
-              <a href="#" className="hover:text-blue-400 transition-colors">
-                GitHub
-              </a>
+      {/* Main Content */}
+      <main className="flex-1">{children}</main>
+
+      {/* Footer */}
+      <footer className="bg-[#1a1208] border-t border-[#3d2b14]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-7 h-7 rounded-md gradient-copper flex items-center justify-center">
+                  <Droplets className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-[#f5e6d0] font-bold text-sm">
+                  STRATEGIC<span className="text-[#B87333]">OIL</span>SUPPLY
+                </span>
+              </div>
+              <p className="text-[#8B7355] text-sm leading-relaxed">
+                The premier Web3 domain namespace for the global energy sector. 
+                Own your digital identity on the blockchain.
+              </p>
             </div>
+            <div>
+              <h4 className="text-[#D4A574] font-semibold text-sm uppercase tracking-wider mb-3">
+                Quick Links
+              </h4>
+              <ul className="space-y-2">
+                <li><Link to="/" className="text-[#8B7355] hover:text-[#D4A574] text-sm transition-colors">Home</Link></li>
+                <li><Link to="/domains" className="text-[#8B7355] hover:text-[#D4A574] text-sm transition-colors">Available Domains</Link></li>
+                <li><Link to="/register" className="text-[#8B7355] hover:text-[#D4A574] text-sm transition-colors">Register</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-[#D4A574] font-semibold text-sm uppercase tracking-wider mb-3">
+                Powered By
+              </h4>
+              <p className="text-[#8B7355] text-sm">
+                Built on <a href="https://freename.io/discover/strategicoilsupply" target="_blank" rel="noopener noreferrer" className="text-[#B87333] hover:text-[#D4A574]">Freename.io</a> — 
+                the leading Web3 domain platform. Minted on Polygon & Base.
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 pt-6 border-t border-[#3d2b14] text-center">
+            <p className="text-[#5c4a3a] text-xs">
+              &copy; 2026 .strategicoilsupply TLD. All rights reserved. Lifetime ownership. No renewal fees.
+            </p>
           </div>
         </div>
       </footer>
