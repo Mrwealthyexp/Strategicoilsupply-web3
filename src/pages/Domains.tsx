@@ -114,7 +114,8 @@ export default function Domains() {
             <Input
               placeholder="Search domains..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+    
               className="pl-10 bg-[#1a1208] border-[#3d2b14] text-[#f5e6d0] placeholder:text-[#5c4a3a] focus:border-[#B87333]"
             />
           </div>
