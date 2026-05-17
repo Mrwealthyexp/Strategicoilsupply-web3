@@ -194,5 +194,4 @@ export default function Domains() {
       </div>
     </div>
   )
-    }
-          
+}
