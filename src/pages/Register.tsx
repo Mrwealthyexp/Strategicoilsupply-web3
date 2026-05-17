@@ -274,4 +274,5 @@ export default function Register() {
       </section>
     </div>
   )
-}
+            }
+
